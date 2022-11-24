@@ -7,7 +7,7 @@ import {
     WsResponse,
 } from '@nestjs/websockets';
 import { UsePipes, UseGuards } from '@nestjs/common';
-import { MessageDto } from '../dtos/Teste.dto';
+import { MessageDto } from '../dtos/teste.dto';
 import { WSValidationPipe } from '../../../common/ws-validation.pipe';
 import { Socket } from 'socket.io';
 import { WsGuard } from 'src/websocket/common/auth.service';
