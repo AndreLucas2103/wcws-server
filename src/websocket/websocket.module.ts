@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { SocketModule } from './modules/socket/socket.module';
-import { TesteGateway } from './modules/usuario/events/teste/teste.gateway';
+import { UsuarioModule } from './modules/usuario/usuario.module';
 
 @Module({
-    imports: [SocketModule],
-    providers: [TesteGateway],
+    imports: [SocketModule, UsuarioModule],
+    providers: [],
 })
 export class WebsocketsModule {}

@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 import { SocketAdapter } from './websocket/websocket.adapter';
@@ -22,6 +23,13 @@ async function bootstrap() {
     );
 
     app.useWebSocketAdapter(new SocketAdapter(app));
+
+    const config = new DocumentBuilder()
+        .setTitle('Doc WCWS Server')
+        .setVersion('1.0')
+        .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api-doc', app, document);
 
     await app.listen(process.env.PORT || 3030);
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-
 @Injectable()
 export class AppService {
-    getServerRun(): string {
+    async getServerRun(): Promise<string> {
         return 'Server is running';
     }
 }
