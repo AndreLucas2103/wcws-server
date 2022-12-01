@@ -21,17 +21,24 @@ export class UsuarioService {
         return await this.usuario.findById(_id);
     }
 
-    async buscarSocketId(socketId: string): Promise<Usuario> {
+    async buscarSocketId(socketId: string): Promise<UsuarioDocument> {
         return await this.usuario.findOne({
             socketId,
         });
     }
 
-    async buscar(condicao?: FilterQuery<UsuarioDocument>): Promise<Usuario> {
-        return await this.usuario.findOne(condicao);
+    async buscar(
+        condicao?: FilterQuery<UsuarioDocument>,
+        opcao?: {
+            selectSenha?: boolean;
+        },
+    ): Promise<UsuarioDocument> {
+        return await this.usuario
+            .findOne(condicao)
+            .select(opcao.selectSenha ? '+senha' : '');
     }
 
-    async criar(data: CriarUsuarioDto): Promise<Usuario> {
+    async criar(data: CriarUsuarioDto): Promise<UsuarioDocument> {
         return await this.usuario.create(data);
     }
 

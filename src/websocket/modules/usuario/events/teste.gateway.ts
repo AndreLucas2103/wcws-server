@@ -10,17 +10,17 @@ import { UsePipes, UseGuards } from '@nestjs/common';
 import { MessageDto } from '../dtos/teste.dto';
 import { WSValidationPipe } from '../../../common/ws-validation.pipe';
 import { Socket } from 'socket.io';
-import { WsGuard } from 'src/websocket/common/auth.service';
+import { WsJwtAuthGuard } from '@/websocket/common/ws-jwt-auth.guard';
 
-@UseGuards(WsGuard)
+@UseGuards(new WsJwtAuthGuard('asd'))
 @UsePipes(new WSValidationPipe())
 @WebSocketGateway()
 export class TesteGateway {
     @SubscribeMessage('teste')
     handleEvent(
         @ConnectedSocket() socket: Socket,
-        @MessageBody() data: MessageDto,
+        /* @MessageBody() data: MessageDto, */
     ) {
-        console.log(socket.handshake.auth);
+        console.log('ok');
     }
 }

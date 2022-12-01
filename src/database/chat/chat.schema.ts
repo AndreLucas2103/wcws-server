@@ -12,7 +12,7 @@ export class Chat {
     @Prop({
         default: uuidv4(),
     })
-    uuid: string;
+    uid: string;
 
     @Prop({ required: true })
     nome: string;
