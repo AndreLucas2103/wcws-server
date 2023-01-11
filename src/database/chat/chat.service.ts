@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { FilterQuery, Model } from 'mongoose';
+import { FilterQuery, Model, QueryOptions } from 'mongoose';
 import { Chat, ChatDocument } from './chat.schema';
 import { CriarChatDto } from './dtos/criar-chat.dto';
 
@@ -11,23 +11,27 @@ export class ChatService {
         private readonly chat: Model<ChatDocument>,
     ) {}
 
-    async buscarId(_id: string) {
-        return this.chat.findById(_id);
+    async buscarId(_id: string, opcoes?: QueryOptions<ChatDocument>) {
+        return await this.chat.findById(_id, opcoes);
     }
 
-    async buscar(condicao: FilterQuery<ChatDocument>): Promise<Chat> {
-        return this.chat.findOne(condicao);
+    async buscar(condicao: FilterQuery<ChatDocument>) {
+        return await this.chat.findOne(condicao);
     }
 
-    async criar(data: CriarChatDto): Promise<Chat> {
-        return this.chat.create(data);
+    async buscarTodos(condicao?: FilterQuery<ChatDocument>) {
+        return await this.chat.find(condicao);
+    }
+
+    async criar(data: CriarChatDto): Promise<ChatDocument> {
+        return await this.chat.create(data);
     }
 
     async atualizar(_id: string, data: Partial<Chat>) {
-        return this.chat.updateOne({ _id }, data);
+        return await this.chat.updateOne({ _id }, data);
     }
 
     async deletar(_id: string) {
-        this.chat.deleteOne({ _id });
+        await this.chat.deleteOne({ _id });
     }
 }

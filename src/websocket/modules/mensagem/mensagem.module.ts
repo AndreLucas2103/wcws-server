@@ -1,9 +1,9 @@
 import { DatabaseModule } from '@/database/database.module';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { NovaMensagemGateway } from './events/nova-mensagem.gateway';
 
 @Module({
-    controllers: [AppController],
+    providers: [NovaMensagemGateway],
     imports: [DatabaseModule],
 })
-export class RunningModule {}
+export class MensagemModule {}

@@ -3,24 +3,31 @@ import {
     MessageBody,
     SubscribeMessage,
     WebSocketGateway,
+    WebSocketServer,
     WsException,
     WsResponse,
 } from '@nestjs/websockets';
 import { UsePipes, UseGuards } from '@nestjs/common';
 import { MessageDto } from '../dtos/teste.dto';
 import { WSValidationPipe } from '../../../common/ws-validation.pipe';
-import { Socket } from 'socket.io';
+import { Socket, Server } from 'socket.io';
 import { WsJwtAuthGuard } from '@/websocket/common/ws-jwt-auth.guard';
 
-@UseGuards(new WsJwtAuthGuard('asd'))
-@UsePipes(new WSValidationPipe())
 @WebSocketGateway()
 export class TesteGateway {
-    @SubscribeMessage('teste')
+    @WebSocketServer()
+    io: Server;
+
+    @SubscribeMessage('client-server')
     handleEvent(
         @ConnectedSocket() socket: Socket,
         /* @MessageBody() data: MessageDto, */
     ) {
-        console.log('ok');
+        socket.emit('server to client event', 200);
+    }
+
+    @SubscribeMessage('clients-count')
+    handleEvent2() {
+        console.log(this.io.sockets.adapter.rooms.size);
     }
 }

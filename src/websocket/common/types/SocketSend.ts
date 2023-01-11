@@ -1,4 +1,4 @@
-export class CallbackData {
+export class SocketSend {
     public readonly data: object | object[];
 
     constructor(data?: object | object[]) {

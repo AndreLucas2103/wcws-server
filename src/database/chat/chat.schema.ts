@@ -10,35 +10,38 @@ export type ChatDocument = HydratedDocument<Chat>;
 })
 export class Chat {
     @Prop({
-        default: uuidv4(),
+        type: String,
+        default: uuidv4,
     })
     uid: string;
 
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     nome: string;
 
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     email: string;
 
-    @Prop({ default: null, unique: true })
+    @Prop({ type: String, default: null })
     socketId: string | null;
 
-    @Prop({ default: 1, enum: [1, 2, 3] }) // 1- aguardando, 2- andamento, 3-finalizado, 4-em tranferência
+    @Prop({ type: Number, default: 1, enum: [1, 2, 3, 4] }) // 1- aguardando, 2- andamento, 3-finalizado, 4-em tranferência
     situacao: number;
 
-    @Prop({ default: now() })
+    @Prop({ type: Date, default: now() })
     dataInicio: Date;
 
-    @Prop({ default: null })
+    @Prop({ type: Date, default: null })
     dataFim: Date | null;
 
     @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' }] })
-    usuarioResponsavel: Usuario[];
+    usuarioResponsavel: Usuario[] | string[];
 
     @Prop({
-        type: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Usuario',
+        default: null,
     })
-    usuarioFIla: Usuario | null;
+    usuarioFila: Usuario | null | string;
 }
 
 export const ChatSchema = SchemaFactory.createForClass(Chat);

@@ -1,4 +1,3 @@
-
 ## Description
 
 Aplicação OpenSource para aprendizagem
@@ -40,20 +39,21 @@ $ yarn test:e2e
 # test coverage
 $ yarn test:cov
 ```
+
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+-   Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+-   Website - [https://nestjs.com](https://nestjs.com/)
 
 ## License
 
 Nest is [MIT licensed](LICENSE).
 
 ---
+
 ## Informações extra
 
-- O tratamento de erro ocorre em dois casos
+-   O tratamento de erro ocorre em dois casos
 
 ```bash
 Quando enviado um socket.emit (client) o sistema pode retornar um callback contendo a resposta de sucess ou error
@@ -66,6 +66,7 @@ Quando enviado um socket.emit (client) o sistema pode retornar um callback conte
     }
 }
 ```
+
 ```bash
 Erros que podem ser retornados de forma global (validações, autenticação, etc) são retornados ao ouvite "exception"
 {
@@ -73,6 +74,7 @@ Erros que podem ser retornados de forma global (validações, autenticação, et
   message: string[] or string # em formato de string, geralmente é devido a validações do ValidationPipe
 }
 ```
+
 ```bash
 Os códigos de erros não seguem os padrões HTTP
 ```

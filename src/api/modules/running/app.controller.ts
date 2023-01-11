@@ -1,13 +1,17 @@
+import { UsuarioService } from '@/database/usuario/usuario.service';
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-
 
 @Controller()
 export class AppController {
-    constructor(private readonly appService: AppService) {}
+    constructor(private readonly usuario: UsuarioService) {}
 
     @Get()
     async getServerRun() {
-        return this.appService.getServerRun();
+        return 'Server is running';
+    }
+
+    @Get('teste')
+    async teste() {
+        return await this.usuario.proximoUsuarioFila();
     }
 }

@@ -36,11 +36,16 @@ export class AuthController {
         if (!(await bcrypt.compare(data.senha, usuario.senha)))
             throw new AppError('Credênciais inválidas', 401);
 
+        await this.usuario.atualizar(usuario._id.toString(), {
+            statusChat: 2,
+        });
+
         usuario.senha = undefined;
+        usuario.statusChat = 2;
 
         return new AppResponse({
             usuario,
-            token: generateToken({ id: usuario._id }),
+            token: generateToken({ idUsuario: usuario._id, isUsuario: true }),
         });
     }
 }
